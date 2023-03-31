@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Header -->
+    <dimen name="header_height">200dp</dimen>
+    <dimen name="header_title_size">40sp</dimen>
+    <dimen name="header_subtitle_size">20sp</dimen>
+
+    <!-- Car Item -->
+    <dimen name="car_image_height">90dp</dimen>
+    <dimen name="car_image_width">150dp</dimen>
+    <dimen name="card_line">4dp</dimen>
+
+    <!-- spaces -->
+    <dimen name="space">10dp</dimen>
+    <dimen name="small_space">5dp</dimen>
+    <dimen name="normal_space">10dp</dimen>
+    <dimen name="large_space">15dp</dimen>
+    <dimen name="x_large_space">20dp</dimen>
+</resources>
