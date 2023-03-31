@@ -1,6 +1,6 @@
 package com.example.cnexia_challenge.factories
 
-import com.example.models.Car
+import com.example.cnexia_challenge.models.Car
 import com.google.gson.Gson
 import org.json.JSONArray
 

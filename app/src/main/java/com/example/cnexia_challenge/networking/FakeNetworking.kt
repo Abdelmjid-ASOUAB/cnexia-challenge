@@ -3,7 +3,7 @@ package com.example.cnexia_challenge.networking
 import android.content.Context
 import com.example.cnexia_challenge.R
 import com.example.cnexia_challenge.factories.CarFactory.jsonToListCar
-import com.example.models.Car
+import com.example.cnexia_challenge.models.Car
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

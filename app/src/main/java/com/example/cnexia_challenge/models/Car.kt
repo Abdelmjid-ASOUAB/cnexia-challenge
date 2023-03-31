@@ -1,4 +1,4 @@
-package com.example.models
+package com.example.cnexia_challenge.models
 
 import java.io.Serializable
 
