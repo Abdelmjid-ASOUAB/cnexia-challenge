@@ -2,4 +2,5 @@
     <string name="app_name">Guidomia</string>
     <string name="header_title">Tacoma 2021</string>
     <string name="header_subtitle">get your`s now</string>
+    <string name="price">Price: %s</string>
 </resources>
