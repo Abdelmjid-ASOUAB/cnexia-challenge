@@ -5,6 +5,11 @@
     <dimen name="header_title_size">40sp</dimen>
     <dimen name="header_subtitle_size">20sp</dimen>
 
+    <!-- Car Item -->
+    <dimen name="car_image_height">90dp</dimen>
+    <dimen name="car_image_width">150dp</dimen>
+    <dimen name="card_line">4dp</dimen>
+
     <!-- spaces -->
     <dimen name="space">10dp</dimen>
     <dimen name="small_space">5dp</dimen>
