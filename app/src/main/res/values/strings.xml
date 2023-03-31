@@ -3,4 +3,6 @@
     <string name="header_title">Tacoma 2021</string>
     <string name="header_subtitle">get your`s now</string>
     <string name="price">Price: %s</string>
+    <string name="pros">Pros:</string>
+    <string name="cons">Cons:</string>
 </resources>
