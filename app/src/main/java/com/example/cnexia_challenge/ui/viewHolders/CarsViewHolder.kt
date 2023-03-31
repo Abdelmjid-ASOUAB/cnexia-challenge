@@ -9,20 +9,43 @@ import com.example.cnexia_challenge.models.Car
 
 class CarsViewHolder(private val binding: CarItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(car: Car, context : Context) {
-        binding.carName.text = car.make
-        binding.carPrice.text = context.getString(
-            R.string.price,
-            car.customerPrice.toString()
+    /**
+     * Bind the car data to the view
+     */
+    fun bind(car: Car, context: Context) {
+        this.binding.carName.text = car.make
+        this.binding.carPrice.text = context.getString(
+            R.string.price, car.customerPrice.toString()
         )
-        binding.rating.rating = car.rating.toFloat()
+        this.binding.rating.rating = car.rating.toFloat()
+        setImageDrawable(car)
     }
 
+    /**
+     * Set the image drawable based on the car make
+     */
+    private fun setImageDrawable(car: Car) {
+        val image = if (car.make.lowercase().contains("mercedes")) {
+            R.drawable.mercedez
+        } else if (car.make.lowercase().contains("bmw")) {
+            R.drawable.bmw
+        } else if (car.make.lowercase().contains("alpina")) {
+            R.drawable.alpine_roadster
+        } else if (car.make.lowercase().contains("land")) {
+            R.drawable.range_rover
+        } else {
+            R.drawable.tacoma
+        }
 
-    // is Last Item
+        this.binding.carImage.setImageResource(image)
+    }
+
+    /**
+     * Hide the line if it is the last item
+     */
     fun isLastItem(lastItem: Boolean) {
         if (lastItem) {
-            binding.cardLine.visibility = View.GONE
+            this.binding.cardLine.visibility = View.GONE
         }
     }
 }
