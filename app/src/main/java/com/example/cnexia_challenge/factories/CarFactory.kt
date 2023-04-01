@@ -8,7 +8,7 @@ import org.json.JSONArray
  *  CarFactory
  *  Use to convert json to Car or List<Car>
  */
-object CarFactory{
+object CarFactory {
     /**
      *  Convert json to Car
      *  @param json a String json object
@@ -36,5 +36,25 @@ object CarFactory{
         }
 
         return listCar
+    }
+
+    /**
+     *  Get list of make from list of cars
+     *  @param cars a List<Car>
+     *
+     *  @return List<String>
+     */
+    fun getMakes(cars: List<Car>): List<String> {
+        return cars.map { it.make }
+    }
+
+    /**
+     *  Get list of model from list of cars
+     *  @param cars a List<Car>
+     *
+     *  @return List<String>
+     */
+    fun getModels(cars: List<Car>): List<String> {
+        return cars.map { it.model }
     }
 }
