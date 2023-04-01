@@ -110,7 +110,11 @@ class MainActivity : AppCompatActivity() {
                     parent?.getItemAtPosition(position) as String
                 }
 
-                viewModel.filterCarsByModel(model)
+                val filter = viewModel.filter.copy(
+                    model = model
+                )
+
+                viewModel.filterCarsByMakeAndModel(filter)
             }
         }
 
@@ -132,7 +136,12 @@ class MainActivity : AppCompatActivity() {
                     parent?.getItemAtPosition(position) as String
                 }
 
-                viewModel.filterCarsByMake(make)
+
+                val filter = viewModel.filter.copy(
+                    make = make
+                )
+
+                viewModel.filterCarsByMakeAndModel(filter)
             }
         }
 

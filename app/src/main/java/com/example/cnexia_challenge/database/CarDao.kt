@@ -23,4 +23,7 @@ interface CarDao {
 
     @Query("SELECT * FROM cars WHERE model Like '%' || :model || '%'")
     fun getCarByModel(model: String): LiveData<List<Car>>
+
+    @Query("SELECT * FROM cars WHERE make LIKE '%' || :make || '%' OR model LIKE '%' || :model || '%'")
+    fun getAllCarsByMakeAndModel(make: String, model: String): LiveData<List<Car>>
 }

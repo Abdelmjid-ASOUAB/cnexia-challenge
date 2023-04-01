@@ -3,6 +3,7 @@ package com.example.cnexia_challenge.repositories
 import androidx.lifecycle.LiveData
 import com.example.cnexia_challenge.database.CarDao
 import com.example.cnexia_challenge.models.Car
+import com.example.cnexia_challenge.models.MakeModelFilter
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,5 +23,9 @@ class CarRepository @Inject constructor(
 
     fun filterCarsByModel(model: String): LiveData<List<Car>> {
         return this.carDao.getCarByModel(model)
+    }
+
+    fun filterCarsByMakeAndModel(filter: MakeModelFilter): LiveData<List<Car>> {
+        return this.carDao.getAllCarsByMakeAndModel(filter.make, filter.model)
     }
 }
