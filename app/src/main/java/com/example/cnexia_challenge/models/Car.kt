@@ -1,8 +1,13 @@
 package com.example.cnexia_challenge.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Entity(tableName = "cars")
 data class Car(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     val consList: List<String>,
     val customerPrice: Long,
     val make: String,
