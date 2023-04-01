@@ -3,6 +3,8 @@ package com.example.cnexia_challenge.ui
 import android.R as AndroidR
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,34 +16,28 @@ import com.example.cnexia_challenge.ui.viewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.example.cnexia_challenge.R
+import com.example.cnexia_challenge.models.Car
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
 
-    private lateinit var filterModelAdapter: ArrayAdapter<String>
-    private lateinit var filterMakeAdapter: ArrayAdapter<String>
-
     @Inject
     lateinit var carsAdapter: CarsAdapter
+    private lateinit var filterModelAdapter: ArrayAdapter<String>
+    private lateinit var filterMakeAdapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(this.binding.root)
         this.initRecyclerView()
-        this.loadCars()
         this.observerCarsResponse()
         this.initModelFiltersSpinner()
         this.initMakeFiltersSpinner()
-    }
-
-    /**
-     * Load cars from
-     */
-    private fun loadCars() {
-        this.viewModel.loadCarsList()
+        this.setMakeFilerListener()
+        this.setModelFilerListener()
     }
 
     /**
@@ -50,8 +46,7 @@ class MainActivity : AppCompatActivity() {
     private fun observerCarsResponse() {
         this.viewModel.getCarListLiveData().observe(this) { cars ->
             this.carsAdapter.setCarsList(cars)
-            this.filterModelAdapter.addAll(getModels(cars))
-            this.filterMakeAdapter.addAll(getMakes(cars))
+            this.addFilterSpinnerData(cars)
         }
     }
 
@@ -71,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         this.filterModelAdapter = ArrayAdapter(this, AndroidR.layout.simple_spinner_item, mutableListOf<String>())
         this.filterModelAdapter.setDropDownViewResource(AndroidR.layout.simple_spinner_dropdown_item)
         this.binding.filter.modelFiler.spinner.adapter = this.filterModelAdapter
-        this.filterModelAdapter.add(getString(R.string.filter_by_model))
     }
 
     /**
@@ -81,6 +75,65 @@ class MainActivity : AppCompatActivity() {
         this.filterMakeAdapter = ArrayAdapter(this, AndroidR.layout.simple_spinner_item, mutableListOf<String>())
         this.filterMakeAdapter.setDropDownViewResource(AndroidR.layout.simple_spinner_dropdown_item)
         this.binding.filter.makeFiler.spinner.adapter = this.filterMakeAdapter
+    }
+
+    /**
+     * Add filter spinner data
+     */
+    private fun addFilterSpinnerData(cars: List<Car>) {
+        if (filterModelAdapter.count != 0 && filterMakeAdapter.count != 0) {
+            return
+        }
+
+
+        this.filterModelAdapter.add(getString(R.string.filter_by_model))
         this.filterMakeAdapter.add(getString(R.string.filter_by_make))
+
+        this.filterModelAdapter.addAll(getModels(cars))
+        this.filterMakeAdapter.addAll(getMakes(cars))
+    }
+
+    /**
+     * Set model filter listener
+     */
+    private fun setModelFilerListener() {
+        this.binding.filter.modelFiler.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val model = if (position == 0) {
+                    ""
+                } else {
+                    parent?.getItemAtPosition(position) as String
+                }
+
+                viewModel.filterCarsByModel(model)
+            }
+        }
+
+    }
+
+    /**
+     * Set make filter listener
+     */
+    private fun setMakeFilerListener() {
+        this.binding.filter.makeFiler.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val make = if (position == 0) {
+                    ""
+                } else {
+                    parent?.getItemAtPosition(position) as String
+                }
+
+                viewModel.filterCarsByMake(make)
+            }
+        }
+
     }
 }
