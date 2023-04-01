@@ -15,12 +15,32 @@ class MainViewModel @Inject constructor(
 
     private val listCarLiveData: MutableLiveData<List<Car>> = MutableLiveData()
 
+    init {
+        loadCarsList()
+    }
+
     /**
      * Load the list of cars
      * from the network
      */
     fun loadCarsList() {
         this.listCarLiveData.postValue(fakeNetworking.loadListCars())
+    }
+
+    /**
+     * Filter the list of cars
+     * by make
+     */
+    fun filterCarsByMake(make: String) {
+        //TODO implement the filter after implementing room database
+    }
+
+    /**
+     * Filter the list of cars
+     * by model
+     */
+    fun filterCarsByModel(model: String) {
+        //TODO implement the filter after implementing room database
     }
 
     /**

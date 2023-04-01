@@ -5,4 +5,7 @@
     <string name="price">Price: %s</string>
     <string name="pros">Pros:</string>
     <string name="cons">Cons:</string>
+    <string name="filters">Filters</string>
+    <string name="filter_by_make">Any make</string>
+    <string name="filter_by_model">Any model</string>
 </resources>
