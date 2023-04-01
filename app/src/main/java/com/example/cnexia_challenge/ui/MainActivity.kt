@@ -3,6 +3,7 @@ package com.example.cnexia_challenge.ui
 import android.R as AndroidR
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
      * Observe cars response
      */
     private fun observerCarsResponse() {
-        this.viewModel.getCarListLiveData().observe(this) { cars ->
+        this.viewModel.cars.observe(this) { cars ->
             this.carsAdapter.setCarsList(cars)
             this.addFilterSpinnerData(cars)
         }

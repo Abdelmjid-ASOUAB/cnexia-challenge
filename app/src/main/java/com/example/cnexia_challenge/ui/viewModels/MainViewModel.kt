@@ -4,16 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cnexia_challenge.models.Car
-import com.example.cnexia_challenge.networking.FakeNetworking
+import com.example.cnexia_challenge.repositories.CarRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val fakeNetworking: FakeNetworking
+    private val repository: CarRepository
 ) : ViewModel() {
 
-    private val listCarLiveData: MutableLiveData<List<Car>> = MutableLiveData()
+    private var listCarLiveData: MutableLiveData<List<Car>> = MutableLiveData()
 
     init {
         loadCarsList()
@@ -23,8 +23,10 @@ class MainViewModel @Inject constructor(
      * Load the list of cars
      * from the network
      */
-    fun loadCarsList() {
-        this.listCarLiveData.postValue(fakeNetworking.loadListCars())
+    private fun loadCarsList() {
+        this.repository.getAllCars().observeForever {
+            listCarLiveData.postValue(it)
+        }
     }
 
     /**
@@ -32,7 +34,10 @@ class MainViewModel @Inject constructor(
      * by make
      */
     fun filterCarsByMake(make: String) {
-        //TODO implement the filter after implementing room database
+        this.repository.filterCarsByMake(make).observeForever {
+            this.listCarLiveData.postValue(it)
+        }
+
     }
 
     /**
@@ -40,14 +45,16 @@ class MainViewModel @Inject constructor(
      * by model
      */
     fun filterCarsByModel(model: String) {
-        //TODO implement the filter after implementing room database
+        this.repository.filterCarsByModel(model).observeForever {
+            this.listCarLiveData.postValue(it)
+        }
     }
 
     /**
      * Get the list of cars
      * for the view
      */
-    fun getCarListLiveData(): LiveData<List<Car>> {
-        return this.listCarLiveData
-    }
+    val cars: LiveData<List<Car>>
+        get() = listCarLiveData
+
 }
