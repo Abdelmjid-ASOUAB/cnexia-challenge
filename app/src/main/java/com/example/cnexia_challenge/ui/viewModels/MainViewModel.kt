@@ -1,6 +1,5 @@
 package com.example.cnexia_challenge.ui.viewModels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,7 +33,6 @@ class MainViewModel @Inject constructor(
      */
     fun filterCarsByMake(make: String) {
         //TODO implement the filter after implementing room database
-        Log.e("TAG_FILTER", "filterCarsByMake: $make" )
     }
 
     /**
@@ -43,7 +41,6 @@ class MainViewModel @Inject constructor(
      */
     fun filterCarsByModel(model: String) {
         //TODO implement the filter after implementing room database
-        Log.e("TAG_FILTER", "filterCarsByModel: $model" )
     }
 
     /**
