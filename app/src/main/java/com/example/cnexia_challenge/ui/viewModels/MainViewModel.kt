@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(
      */
     private fun loadCarsList() {
         this.repository.getAllCars().observeForever {
-            listCarLiveData.postValue(it)
+            this.listCarLiveData.postValue(it)
         }
     }
 
@@ -83,14 +83,14 @@ class MainViewModel @Inject constructor(
      * for the view
      */
     val cars: LiveData<List<Car>>
-        get() = listCarLiveData
+        get() = this.listCarLiveData
 
     /**
      * Getter for the filter
      */
     var filter: MakeModelFilter
-        get() = makeModelFilter
+        get() = this.makeModelFilter
         set(value) {
-            makeModelFilter = value
+            this.makeModelFilter = value
         }
 }
