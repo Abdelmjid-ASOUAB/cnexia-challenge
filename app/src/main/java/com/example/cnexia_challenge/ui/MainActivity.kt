@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
      * Add filter spinner data
      */
     private fun addFilterSpinnerData(cars: List<Car>) {
-        if (filterModelAdapter.count != 0 && filterMakeAdapter.count != 0) {
+        if (cars.isEmpty() || this.filterModelAdapter.count != 0 && this.filterMakeAdapter.count != 0) {
             return
         }
 
